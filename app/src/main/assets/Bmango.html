@@ -1,0 +1,354 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login - </title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+<link href="http://bmango.in/vehicles/assets/css/main.d810cf0ae7f39f28f336.css" rel="stylesheet"></head>
+<style>
+body
+{
+    color:#fff;
+}
+.alert , .alert_2{
+  
+  background-color: #f44336;
+  color: white;
+  position:fixed;
+  bottom:0;
+  right:0;
+  z-index:1000;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow">
+        <div class="app-container">
+            <div class="h-100">
+                <div class="h-100 no-gutters row">
+                    
+                    <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-12" style="background:url(http://bmango.in/vehicles/dayavan.jpg);background: url(dayavan.jpg);
+    background-position: center;">
+                        <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
+                            <div class="app-logo">
+                                
+                            </div>
+                            <h4 class="mb-0">
+                                <span class="d-block">Welcome back,</span>
+                                <span>Please sign in to your account.</span>
+                            </h4>
+                            <div class="divider row"></div>
+                            <div>
+                                <form class="" id="login" method="post">
+                                    <div class="form-row ">
+                                        <h2 class="text-primary font-bold" style="text-align: center;font-weight: 700;font-size: 28px;">DAYAVAN CONSULTANCY</h2>
+                                        
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleEmail" class="">Email</label>
+                                                <input name="email" id="exampleEmail" placeholder="Email here..." type="email" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <label for="examplePassword" class="">Password</label>
+                                                <input name="password" id="examplePassword" placeholder="Password here..." type="password" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="divider row"></div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="ml-auto">
+                                            <a class="btn btn-primary btn-lg login textr-default text-uppercase" style="color:#fff;">Login</a>
+                                            
+									<button type="reset" class="btn btn-warning btn-lg">Reset</button>
+									<br/>
+									<br/>
+									<a href="http://bmango.in/vehicles/web/staff" class="btn btn-success">Staff Login</a>
+									<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Register</button>
+                                           
+											</div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="http://bmango.in/vehicles/assets/scripts/main.d810cf0ae7f39f28f336.js"></script></body>
+ <div class="alert col-sm-3 col-xs-12" style="display:none;">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	 <div id="data">
+		 
+	 </div>
+</div>			
+	<script>
+	
+			$(document).ready(function(){
+				  $(".login").click(function(){					  
+				var url='http://bmango.in/vehicles/web/ajax_req_login';					
+				var form =$('#login')[0];
+        // Create an FormData object 
+                var data = new FormData(form);
+                   $.ajax({
+                            type: "POST",
+							enctype: 'multipart/form-data',
+                            url: url,
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 600000,
+                            success: function (data) {
+								
+								var myObj= JSON.parse(data);
+								if(myObj.status=='success')
+								{		
+									$('#login')[0].reset();							
+									$('#data').html(myObj.message);
+									$('.alert').css('background-color','green');	
+									$('.alert').css('display','block');	
+									setTimeout(function () {
+									window.location.href = myObj.url;
+								}, 3000);
+								}
+									else
+									{
+											$('#data').html('');	
+										$('.alert').css('background-color','#f44336');											
+											$('.alert').css('display','block');
+											$('#data').html(myObj.message);
+												
+											setTimeout(function () {
+											$('.alert').css('display','none');
+										}, 5000);
+												
+									}
+								
+
+                            },
+                            error: function (e) {             
+                                console.log("ERROR : ", e);               
+
+                            }
+                       
+
+            });
+				  });
+				  
+				  
+				    $(".add_agents").click(function(){
+				var url='http://bmango.in/vehicles/web/ajax_post_agents';	
+			
+				var form =$('#add_agents')[0];
+        // Create an FormData object 
+                var data = new FormData(form);
+                   $.ajax({
+                            type: "POST",
+							enctype: 'multipart/form-data',
+                            url: url,
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 600000,
+                            success: function (data) {
+						
+								var myObj= JSON.parse(data);
+								if(myObj.status=='success')
+								{		
+									$('#add_agents')[0].reset();							
+									$('#data_2').html(myObj.message);
+									$('.alert_2').css('background-color','green');	
+									$('.alert_2').css('display','block');	
+								}
+									else
+									{
+											$('#data_2').html('');	
+										$('.alert_2').css('background-color','#f44336');											
+											$('.alert_2').css('display','block');
+											Object.entries(myObj).forEach(([key, value]) => {							
+											
+												//$('#'+key).html(value);		
+												$('#data_2').append(value);												
+												})
+												
+											
+												
+									}
+								
+
+                            },
+                            error: function (e) {             
+                                console.log("ERROR : ", e);               
+
+                            }
+                       
+
+            });
+				  });
+				  
+				});
+	
+	</script>
+	
+
+<style>
+    label
+    {
+        color:#000;
+    }
+    .register_title
+    {
+        color:#000;
+        font-weight:700;
+        font-size:bold;
+    }
+    .modal-header {
+    display: block;
+    }
+    
+    .alert {
+  
+  background-color: #f44336;
+  color: white;
+  position:fixed;
+  bottom:0;
+  right:0;
+  z-index:1000;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" style="background:#000;">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title register_title">Register</h4>
+      </div>
+      <div class="modal-body">
+       
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="main-card mb-3 card">
+                                        <div class="card-body cc_cursor">
+                                            
+                                            <form class="" id="add_agents" enctype="multipart/form-data">
+                                                <div class="position-relative form-group">
+                                                    <label class="">Name</label>
+                                                    <input name="name" placeholder="" type="text" class="form-control">
+                                                </div>
+												<div class="position-relative form-group">
+                                                    <label class="">Email</label>
+                                                    <input name="email" placeholder="" type="text" class="form-control">
+                                                </div>
+												<div class="position-relative form-group">
+                                                    <label class="">Password</label>
+                                                    <input name="password" placeholder="" type="password" class="form-control">
+                                                </div>
+												<div class="position-relative form-group">
+                                                    <label class="">Confirm Password</label>
+                                                    <input name="confirm_password" placeholder="" type="password" class="form-control">
+                                                </div>
+												<div class="position-relative form-group ">
+												<br>
+                                                   <input name="images" placeholder="" type="file" class="" style="display:none">
+                                               </div>	
+                                               
+                                       </div>
+                                    </div>
+                                </div>
+								<div class="col-md-6">
+                                    <div class="main-card mb-3 card">
+                                        <div class="card-body">
+                                            
+                                                <div class="position-relative form-group">
+                                                    <label class="">Address</label>
+                                                    <input name="address" placeholder="" type="text" class="form-control">
+                                                </div>
+												<div class="position-relative form-group">
+                                                    <label class="">City</label>
+                                                    <input name="city" placeholder="" type="text" class="form-control">
+                                                </div>
+												<div class="position-relative form-group">
+                                                    <label class="">State</label>
+                                                    <input name="state" placeholder="" type="text" class="form-control">
+                                                </div>
+												<div class="position-relative form-group">
+                                                    <label class="">Zip </label>
+                                                    <input name="zip" placeholder="" type="text" class="form-control">
+                                                </div>
+												<br>
+                                                <a class="mt-1 btn btn-primary add_agents">Register</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="alert_2 col-sm-3 col-xs-12" style="display:none;z-index:9999;">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	 <div id="data_2" style="padding:20px;">
+		 
+	 </div>
+</div>			
+
+                           
+                                                 
+</html>
