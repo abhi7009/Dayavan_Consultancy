@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/vehicle_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="id"
+        android:layout_weight="0.8"
+        android:textSize="16sp"
+        android:textStyle="bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/vehicle_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vehicle Number"
+        android:layout_weight="0.2"
+        android:textSize="16sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+</LinearLayout>
